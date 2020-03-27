@@ -348,7 +348,7 @@ bool MainWindow::preFlightCheck()
     msgBox.setIcon(QMessageBox::Critical);
     // non-empty ssid
     if (ui->ssidLineEdit->text().isEmpty()) {
-        msgBox.setText(tr("No SSID ha-s been specified."));
+        msgBox.setText(tr("No SSID has been specified."));
         msgBox.exec();
         return false;
     }
