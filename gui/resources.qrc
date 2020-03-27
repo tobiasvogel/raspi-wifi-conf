@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="unhide-icon">resources/eye-icon.png</file>
+        <file alias="hide-icon">resources/hide-icon.png</file>
+        <file alias="question-icon">resources/question.png</file>
+        <file alias="apply-icon">resources/apply.png</file>
+        <file alias="abort-icon">resources/abort.png</file>
+    </qresource>
+</RCC>

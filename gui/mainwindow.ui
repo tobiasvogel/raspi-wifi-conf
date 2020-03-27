@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>679</width>
+    <height>668</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <widget class="QGroupBox" name="wifiGroupBox">
+      <property name="title">
+       <string>WiFi</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="ssidLineEdit">
+           <property name="placeholderText">
+            <string>SSID</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="wifiScanPushButton">
+           <property name="text">
+            <string>&amp;Scan</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="pskLineEdit">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string>Password</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="hidePskPushButton">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/unhide-icon</normaloff>:/unhide-icon</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="noPasswordCheckBox">
+           <property name="text">
+            <string>Network doesn't require a password</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_noPsk" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>Check this Box if your Network does not require any authentication.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="hiddenNetworkCheckBox">
+           <property name="text">
+            <string>This is a hidden Network</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_hiddenNetwork" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>Check this Box if your Network/Router does not broadcast the Name of the WiFi-Network (SSID) publicly.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="hidePlainPasswordCheckBox">
+           <property name="text">
+            <string>Hide WiFi Password in Plain Text from Config File</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_hidePlainPassword" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>By default the Configuration-File contains both a human readable unencrypted form as well as an encryptet form of your Passphrase. If this Option is checked, the inclusion of the unencrypted human readable form of the Passphrase will be suppressed for an increased Level of Security.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="advancedGroupBox">
+      <property name="title">
+       <string>Advanced</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="countryCodeLabel">
+           <property name="text">
+            <string>WiFi Country Code</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="countryCode_LookupLabel">
+           <property name="toolTip">
+            <string>URL: https://en.wikipedia.org/wiki/ISO_3166-1
+(opens externally in your default Webbrowser)</string>
+           </property>
+           <property name="text">
+            <string>&lt;a href=&quot;https://en.wikipedia.org/wiki/ISO_3166-1&quot;&gt;Lookup Online&lt;/a&gt;</string>
+           </property>
+           <property name="openExternalLinks">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>4</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="countryCodeLineEdit">
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>40</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="inputMask">
+            <string>&gt;AAa</string>
+           </property>
+           <property name="maxLength">
+            <number>3</number>
+           </property>
+           <property name="cursorPosition">
+            <number>0</number>
+           </property>
+           <property name="placeholderText">
+            <string>GB</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>4</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_wifiCC" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>Different Countries allow WiFi-Networks on different Radio-Frequencies (Channels). Enter the Two-Letter Country Code here of the Place where your WiFi Network is operated.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="noRasbpiCheckBox">
+           <property name="text">
+            <string>Don't include Raspberry Pi-specific Config Lines</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="editHeaderPushButton">
+           <property name="text">
+            <string>Edit</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>4</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_noRaspiHeader" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>In order to make this Tool more versatile, the Raspberry Pi specific Configuration Lines can be excluded from the generated File by enabling this Option.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="assignPriorityCheckBox">
+           <property name="text">
+            <string>Assign Priority to this Network</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="networkPrioritySpinBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>999</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>4</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_networkPriority" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>You can assign different Priorities to different Networks in case more than one Network is available at the same time at any given place. (higher Value eq. higher Priority)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="provideIdentificationCheckBox">
+           <property name="text">
+            <string>Provide Identification String</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_11">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="networkIdentificationLineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>4</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_identificationString" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>Any Identifier entered here will make it easier to recognise Network Configurations in 3rd party Apps. (ex. &quot;Home&quot;)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="sshCheckBox">
+           <property name="text">
+            <string>Create 'ssh'-file for Headless Access</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_createSSH" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>A Raspberry Pi Computer can be accessed easily using the Secure Shell Protocol if an empty File called 'ssh' is placed in the 'boot'-Directory prior to the first System Startup. Use this Option to conveniently also create a 'ssh'-File alongside with the Network Configuration.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>4</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="outputGroupBox">
+      <property name="title">
+       <string>Output</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="outputLineEdit">
+           <property name="placeholderText">
+            <string>Output Directory</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="browsePushButton">
+           <property name="text">
+            <string>&amp;Browse...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="appendCheckBox">
+           <property name="text">
+            <string>Append Network if Config File exists</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_appendNetworks" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>If you would like to have multiple Networks Configured in a single Configuration check this Box after an initial Configuration File Generation and any further Network Configuration will simply be appended to the existing Configuration.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>4</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalButtonsLayout">
+      <item>
+       <widget class="QPushButton" name="aboutPushButton">
+        <property name="text">
+         <string>&amp;About</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="generatePushButton">
+        <property name="text">
+         <string>&amp;Generate</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>12</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="quitPushButton">
+        <property name="text">
+         <string>&amp;Quit</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>InfoLabel</class>
+   <extends>QWidget</extends>
+   <header>infolabel.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>quitPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>628</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hidePskPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>togglePskVisibility()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>642</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>noPasswordCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>toggleNoPassword(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_noPsk</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_hidePlainPassword</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_createSSH</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>318</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_networkPriority</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>455</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_noRaspiHeader</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_wifiCC</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>245</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_hiddenNetwork</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>wifiScanPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>scanForNetworks()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>616</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>editHeaderPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>editHeaders()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>318</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>noRasbpiCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>toggleNoRaspiHeaders(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>195</x>
+     <y>320</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browsePushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>browseForOutputDir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>616</x>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>generatePushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>generateOutput()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>524</x>
+     <y>568</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_appendNetworks</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>570</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_identificationString</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>396</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>assignPriorityCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>toggleNetworkPriority(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>138</x>
+     <y>358</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>provideIdentificationCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>toggleNetworkIdentification(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>130</x>
+     <y>397</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>aboutPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showAbout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>49</x>
+     <y>645</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
