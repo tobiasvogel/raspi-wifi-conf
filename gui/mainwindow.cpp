@@ -3,7 +3,7 @@
 #include "infolabel.h"
 #include "editheaders.h"
 #include "wifilist.h"
-#include "../incl/wpa_passphrase.h"
+#include "incl/wpa_passphrase.h"
 
 #include <QIcon>
 #include <QMessageBox>
