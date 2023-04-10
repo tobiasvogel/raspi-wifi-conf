@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>679</width>
-    <height>668</height>
+    <height>801</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,7 +63,7 @@
          <item>
           <widget class="QPushButton" name="hidePskPushButton">
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="resources.qrc">
@@ -728,6 +728,182 @@
      </widget>
     </item>
     <item>
+     <widget class="QGroupBox" name="userGroupBox">
+      <property name="title">
+       <string>Admin User</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <widget class="QLabel" name="userNameLabel">
+           <property name="text">
+            <string>Username*</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="userLineEdit"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>4</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_username" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>Up until spring of 2022, any Raspberry Pi OS came with a standard user called 'pi' enabled on the system. For security reasons, the 'pi' user was removed. Use this field to create your own intial user-account instead.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <item>
+          <widget class="QLabel" name="userPasswordLabel">
+           <property name="text">
+            <string>Password*</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="userPasswordLineEdit">
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="hideUserPasswordPushButton">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/unhide-icon</normaloff>:/unhide-icon</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>4</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="InfoLabel" name="infoLabel_userPassword" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="text" stdset="0">
+            <string/>
+           </property>
+           <property name="pixmap" stdset="0">
+            <pixmap resource="resources.qrc">:/question-icon</pixmap>
+           </property>
+           <property name="scaledContents" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="helpText" stdset="0">
+            <string>Up until spring of 2022, any Raspberry Pi OS came with a standard user called 'pi' enabled on the system associated with a standard password 'raspberry'. Since the 'pi'-user was removed in later versions, use this field to set a password for you default user-account.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text">
+          <string>* Username and Password are both case-sensitive!</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
      <spacer name="verticalSpacer_3">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -1255,6 +1431,54 @@
     <hint type="destinationlabel">
      <x>339</x>
      <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hideUserPasswordPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>toggleUserPasswordVisibility()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>642</x>
+     <y>414</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_username</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>infoLabel_userPassword</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displayHelpText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>648</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>

@@ -55,4 +55,4 @@ RESOURCES += \
 
 TRANSLATIONS += languages/lang_de.ts
 
-LIBS += -L$${PWD}/incl -Wl,-rpath=$${PWD}/incl $${PWD}/incl/_libwpa_passphrase.so
+LIBS += -L$${PWD}/incl -Wl,-rpath=$${PWD}/incl $${PWD}/incl/_libwpa_passphrase.a
