@@ -10,9 +10,6 @@
 #include <string.h>
 #include <stdio.h>
 
-// #include "apps.h"
-// #include "progs.h"
-
 #include <openssl/bio.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>
@@ -38,61 +35,10 @@ static const unsigned char cov_2char[64] = {
 
 static const char ascii_dollar[] = { 0x24, 0x00 };
 
-typedef enum {
-    passwd_unset = 0,
-    passwd_md5,
-    passwd_apr1,
-    passwd_sha256,
-    passwd_sha512,
-    passwd_aixmd5
-} passwd_modes;
-
 static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
                      char *passwd, BIO *out, int quiet, int table,
-                     int reverse, size_t pw_maxlen, passwd_modes mode);
+                     int reverse, size_t pw_maxlen);
 
-typedef enum OPTION_choice {
-    OPT_COMMON,
-    OPT_IN,
-    OPT_NOVERIFY, OPT_QUIET, OPT_TABLE, OPT_REVERSE, OPT_APR1,
-    OPT_1, OPT_5, OPT_6, OPT_AIXMD5, OPT_SALT, OPT_STDIN,
-    OPT_R_ENUM, OPT_PROV_ENUM
-} OPTION_CHOICE;
-
-/*
-const OPTIONS passwd_options[] = {
-    {OPT_HELP_STR, 1, '-', "Usage: %s [options] [password]\n"},
-
-    OPT_SECTION("General"),
-    {"help", OPT_HELP, '-', "Display this summary"},
-
-    OPT_SECTION("Input"),
-    {"in", OPT_IN, '<', "Read passwords from file"},
-    {"noverify", OPT_NOVERIFY, '-',
-     "Never verify when reading password from terminal"},
-    {"stdin", OPT_STDIN, '-', "Read passwords from stdin"},
-
-    OPT_SECTION("Output"),
-    {"quiet", OPT_QUIET, '-', "No warnings"},
-    {"table", OPT_TABLE, '-', "Format output as table"},
-    {"reverse", OPT_REVERSE, '-', "Switch table columns"},
-
-    OPT_SECTION("Cryptographic"),
-    {"salt", OPT_SALT, 's', "Use provided salt"},
-    {"6", OPT_6, '-', "SHA512-based password algorithm"},
-    {"5", OPT_5, '-', "SHA256-based password algorithm"},
-    {"apr1", OPT_APR1, '-', "MD5-based password algorithm, Apache variant"},
-    {"1", OPT_1, '-', "MD5-based password algorithm"},
-    {"aixmd5", OPT_AIXMD5, '-', "AIX MD5-based password algorithm"},
-
-    OPT_R_OPTIONS,
-    OPT_PROV_OPTIONS,
-
-    OPT_PARAMETERS(),
-    {"password", 0, 0, "Password text to digest (optional)"},
-    {NULL}
-};
-*/
 static char prog[40];
 void app_bail_out(char *fmt, ...)
 {
@@ -139,12 +85,10 @@ int main(int argc, char **argv)
     int in_noverify = 0;
     int passed_salt = 0, quiet = 0, table = 0, reverse = 0;
     int ret = 1;
-    passwd_modes mode = passwd_unset;
     size_t passwd_malloc_size = 0;
     size_t pw_maxlen = 256; /* arbitrary limit, should be enough for most
                              * passwords */
 
-    mode = passwd_sha512;
 
     char **pwd_ptr;
     pwd_ptr = &defaultpass;
@@ -154,8 +98,6 @@ int main(int argc, char **argv)
         printf("%s: Can't combine -in and -stdin\n", prog);
         goto end;
     }
-
-    // in =...
 
     if ((in == NULL) && (passwds == NULL)) {
         /*
@@ -189,10 +131,8 @@ int main(int argc, char **argv)
 
         do {                    /* loop over list of passwords */
             passwd = *passwds++;
-            //if (!do_passwd(passed_salt, &salt, &salt_malloc, passwd, bio_out,
-            //               quiet, table, reverse, pw_maxlen, mode))
             if (!do_passwd(passed_salt, &salt, &salt_malloc, passwd, NULL,
-                           quiet, table, reverse, pw_maxlen, mode))
+                           quiet, table, reverse, pw_maxlen))
                 goto end;
         } while (*passwds != NULL);
     } else {
@@ -215,10 +155,8 @@ int main(int argc, char **argv)
                 }
 
                 if (!do_passwd
-                    //(passed_salt, &salt, &salt_malloc, passwd, bio_out, quiet,
-                    // table, reverse, pw_maxlen, mode))
                     (passed_salt, &salt, &salt_malloc, passwd, NULL, quiet,
-                     table, reverse, pw_maxlen, mode))
+                     table, reverse, pw_maxlen))
                     goto end;
             }
             done = (r <= 0);
@@ -524,7 +462,7 @@ static char *shacrypt(const char *passwd, const char *magic, const char *salt)
 
 static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
                      char *passwd, BIO *out, int quiet, int table,
-                     int reverse, size_t pw_maxlen, passwd_modes mode)
+                     int reverse, size_t pw_maxlen)
 {
     char *hash = NULL;
 
@@ -536,11 +474,7 @@ static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
         size_t saltlen = 0;
         size_t i;
 
-        if (mode == passwd_md5 || mode == passwd_apr1 || mode == passwd_aixmd5)
-            saltlen = 8;
-
-        if (mode == passwd_sha256 || mode == passwd_sha512)
-            saltlen = 16;
+        saltlen = 16;
 
         assert(saltlen != 0);
 
@@ -574,8 +508,7 @@ static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
     assert(strlen(passwd) <= pw_maxlen);
 
     /* now compute password hash */
-    if (mode == passwd_sha256 || mode == passwd_sha512)
-        hash = shacrypt(passwd, (mode == passwd_sha256 ? "5" : "6"), *salt_p);
+    hash = shacrypt(passwd, "6", *salt_p);
     assert(hash != NULL);
 
     if (table && !reverse)
