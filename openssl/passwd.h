@@ -7,7 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include <string.h>
+#include <string>
+#include <cstring>
 #include <stdio.h>
 
 #include <openssl/bio.h>
@@ -35,12 +36,13 @@ static const unsigned char cov_2char[64] = {
 
 static const char ascii_dollar[] = { 0x24, 0x00 };
 
-static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
+static char *do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
                      char *passwd, BIO *out, int quiet, int table,
                      int reverse, size_t pw_maxlen);
 
 static char prog[40];
-void app_bail_out(char *fmt, ...)
+
+void app_bail_out(const char *fmt, ...)
 {
     va_list args;
 
@@ -74,9 +76,8 @@ char *opt_getprog(void)
 {
     return prog;
 }
-char* defaultpass = "raspberry";
 
-int main(int argc, char **argv)
+std::string generatePasswordHash(std::string plainTextPassword)
 {
     BIO *in = NULL;
     char *infile = NULL, *salt = NULL, *passwd = NULL, **passwds = NULL;
@@ -84,15 +85,18 @@ int main(int argc, char **argv)
     int in_stdin = 0;
     int in_noverify = 0;
     int passed_salt = 0, quiet = 0, table = 0, reverse = 0;
-    int ret = 1;
     size_t passwd_malloc_size = 0;
     size_t pw_maxlen = 256; /* arbitrary limit, should be enough for most
                              * passwords */
 
+    char *cpwdstr = new char[plainTextPassword.length() + 1];
+    std::strcpy(cpwdstr, plainTextPassword.c_str());
 
     char **pwd_ptr;
-    pwd_ptr = &defaultpass;
+    pwd_ptr = &cpwdstr;
     passwds = pwd_ptr;
+
+    char *pwdHash = NULL;
 
     if (infile != NULL && in_stdin) {
         printf("%s: Can't combine -in and -stdin\n", prog);
@@ -129,40 +133,10 @@ int main(int argc, char **argv)
         assert(passwds != NULL);
         assert(*passwds != NULL);
 
-        do {                    /* loop over list of passwords */
-            passwd = *passwds++;
-            if (!do_passwd(passed_salt, &salt, &salt_malloc, passwd, NULL,
-                           quiet, table, reverse, pw_maxlen))
-                goto end;
-        } while (*passwds != NULL);
-    } else {
-        /* in != NULL */
-        int done;
-
-        assert(passwd != NULL);
-        do {
-            int r = BIO_gets(in, passwd, pw_maxlen + 1);
-            if (r > 0) {
-                char *c = (strchr(passwd, '\n'));
-                if (c != NULL) {
-                    *c = 0;     /* truncate at newline */
-                } else {
-                    /* ignore rest of line */
-                    char trash[BUFSIZ];
-                    do
-                        r = BIO_gets(in, trash, sizeof(trash));
-                    while ((r > 0) && (!strchr(trash, '\n')));
-                }
-
-                if (!do_passwd
-                    (passed_salt, &salt, &salt_malloc, passwd, NULL, quiet,
-                     table, reverse, pw_maxlen))
-                    goto end;
-            }
-            done = (r <= 0);
-        } while (!done);
+        passwd = *passwds++;
+        pwdHash = do_passwd(passed_salt, &salt, &salt_malloc, passwd, NULL,
+                       quiet, table, reverse, pw_maxlen);
     }
-    ret = 0;
 
  end:
 #if 0
@@ -171,7 +145,9 @@ int main(int argc, char **argv)
     OPENSSL_free(salt_malloc);
     OPENSSL_free(passwd_malloc);
     BIO_free(in);
-    return ret;
+
+    std::string pwdStr = pwdHash;
+    return pwdStr;
 }
 
 /*
@@ -217,18 +193,8 @@ static char *shacrypt(const char *passwd, const char *magic, const char *salt)
     if (magic_len != 1)
         return NULL;
 
-    switch (magic[0]) {
-    case '5':
-        sha = EVP_sha256();
-        buf_size = 32;
-        break;
-    case '6':
-        sha = EVP_sha512();
-        buf_size = 64;
-        break;
-    default:
-        return NULL;
-    }
+    sha = EVP_sha512();
+    buf_size = 64;
 
     if (strncmp(salt, rounds_prefix, sizeof(rounds_prefix) - 1) == 0) {
         const char *num = salt + sizeof(rounds_prefix) - 1;
@@ -335,7 +301,7 @@ static char *shacrypt(const char *passwd, const char *magic, const char *salt)
     if (!EVP_DigestFinal_ex(md2, temp_buf, NULL))
         goto err;
 
-    if ((p_bytes = OPENSSL_zalloc(passwd_len)) == NULL)
+    if ((p_bytes = (char*)OPENSSL_zalloc(passwd_len)) == NULL)
         goto err;
     for (cp = p_bytes, n = passwd_len; n > buf_size; n -= buf_size, cp += buf_size)
         memcpy(cp, temp_buf, buf_size);
@@ -352,7 +318,7 @@ static char *shacrypt(const char *passwd, const char *magic, const char *salt)
     if (!EVP_DigestFinal_ex(md2, temp_buf, NULL))
         goto err;
 
-    if ((s_bytes = OPENSSL_zalloc(salt_len)) == NULL)
+    if ((s_bytes = (char*)OPENSSL_zalloc(salt_len)) == NULL)
         goto err;
     for (cp = s_bytes, n = salt_len; n > buf_size; n -= buf_size, cp += buf_size)
         memcpy(cp, temp_buf, buf_size);
@@ -460,7 +426,7 @@ static char *shacrypt(const char *passwd, const char *magic, const char *salt)
     return NULL;
 }
 
-static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
+static char *do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
                      char *passwd, BIO *out, int quiet, int table,
                      int reverse, size_t pw_maxlen)
 {
@@ -479,7 +445,7 @@ static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
         assert(saltlen != 0);
 
         if (*salt_malloc_p == NULL)
-            *salt_p = *salt_malloc_p = app_malloc(saltlen + 1, "salt buffer");
+            *salt_p = *salt_malloc_p = (char*)app_malloc(saltlen + 1, "salt buffer");
         if (RAND_bytes((unsigned char *)*salt_p, saltlen) <= 0)
             goto end;
 
@@ -511,14 +477,8 @@ static int do_passwd(int passed_salt, char **salt_p, char **salt_malloc_p,
     hash = shacrypt(passwd, "6", *salt_p);
     assert(hash != NULL);
 
-    if (table && !reverse)
-        printf("%s\t%s\n", passwd, hash);
-    else if (table && reverse)
-        printf("%s\t%s\n", hash, passwd);
-    else
-        printf("%s\n", hash);
-    return 1;
+    return hash;
 
  end:
-    return 0;
+    return NULL;
 }

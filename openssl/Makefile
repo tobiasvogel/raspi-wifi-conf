@@ -1,5 +1,5 @@
 default:
-	gcc -MMD -O2 -Wall -g -I. passwd.c -o passwd -lssl -lcrypto
+	g++ -MMD -O2 -Wall -g -I. test.cpp -o passwd -lssl -lcrypto
 
 clean:
 	-rm -rf passwd
