@@ -4,6 +4,7 @@
 #include "editheaders.h"
 #include "wifilist.h"
 #include "./incl/wpa_passphrase.h"
+#include "../openssl/passwd.h"
 
 #include <QIcon>
 #include <QMessageBox>
@@ -210,6 +211,7 @@ void MainWindow::generateOutput( void ) {
 
    QFile configFile( QDir().toNativeSeparators( ui->outputLineEdit->text() ).append( QDir::separator() ).append( "wpa_supplicant.conf" ) );
    QFile sshFile( QDir().toNativeSeparators( ui->outputLineEdit->text() ).append( QDir::separator() ).append( "ssh" ) );
+   QFile userconfFile( QDir().toNativeSeparators( ui->outputLineEdit->text() ).append( QDir::separator() ).append( "userconf" ) );
 
    if ( ui->sshCheckBox->isChecked() ) {
       if ( sshFile.exists() ) {
@@ -319,6 +321,32 @@ void MainWindow::generateOutput( void ) {
          }
 
          configFile.close();
+      }
+   }
+
+   if ( userconfFile.exists() ) {
+      msgBox.setIcon( QMessageBox::Information );
+      msgBox.setText( tr( "'userconf'-File already exists in the Directory specified." ) );
+      msgBox.exec();
+
+   } else {
+      if ( !userconfFile.open( QFile::ReadWrite ) ) {
+         msgBox.setIcon( QMessageBox::Critical );
+         msgBox.setText( tr( "Error creating the 'userconf'-File. Check your File-Permissions." ) );
+         msgBox.exec();
+         error = true;
+
+      } else {
+         std::string str_userPassword = ui->userPasswordLineEdit->text().toStdString();
+         QString userconfString = ui->userLineEdit->text();
+         userconfString.append( ":" );
+         std::string userPasswordHash;
+         userPasswordHash = generatePasswordHash( str_userPassword );
+         userconfString.append( QString::fromStdString( userPasswordHash ) );
+         QTextStream qout( &userconfFile );
+         qout << userconfString;
+         qout << QChar( '\n' );
+         userconfFile.close();
       }
    }
 
